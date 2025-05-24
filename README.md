@@ -1,8 +1,7 @@
-## About SI-Shina
+## SIMRS
 
-Adalah Aplikasi Sistem Rekam Medis Pasien untuk klinik Medishina yang mempunyai 2 poli yaitu :
-- Poli Umum.
-- Poli Gigi.
+Perlindungan data pribadi, khususnya dalam konteks rekam medis elektronik, merupakan isu krusial yang dihadapi oleh banyak institusi kesehatan. Undang-Undang Perlindungan Data Pribadi memberikan kerangka hukum untuk melindungi data pribadi individu dari penyalahgunaan. Penelitian ini bertujuan untuk menganalisis dan mengimplementasikan enkripsi end-to-end sebagai solusi untuk meningkatkan keamanan dan privasi data rekam medis elektronik. Metode yang digunakan dalam penelitian ini mencakup analisis literatur terkait enkripsi, desain sistem enkripsi end-to-end, serta implementasi prototipe aplikasi berbasis web yang mengintegrasikan enkripsi data. Hasil penelitian menunjukkan bahwa enkripsi end-to-end dapat secara signifikan mengurangi risiko kebocoran data dengan memastikan bahwa hanya pihak yang berwenang yang dapat mengakses informasi sensitif. Selain itu, penelitian ini juga mengeksplorasi tantangan dan solusi dalam penerapan enkripsi dalam sistem rekam medis elektronik. Temuan ini diharapkan dapat memberikan kontribusi terhadap pemahaman yang lebih baik mengenai perlindungan data pribadi dan mendukung institusi kesehatan dalam mematuhi regulasi yang berlaku.
+
 
 ## Hak Akses
 
@@ -17,27 +16,19 @@ Sistem meliputi :
 2. Pasien
 3. Rekam Medis
 4. Apotek
-    - Permintaan Resep
     - Pengeluaran Obat
-5. Pembayaran
-6. Master data
+5. Master data
     - Petugas
     - Dokter
     - Obat
     - Tindakan
-    - ICD X (10469 Entry)
 
 ## Flow
-Pendaftaran -> Dokter -> Apotek -> Pembayaran (Jika Umum) -> Done
 
-## Poli Umum & Gigi
-Input Pendaftaran & Anamnesa => Subject => Object => Assessment => Plan
-
-## Poli Gigi
-Poli Gigi Support Pengisian Odontogram dan riwayat odontoragm pasien.
-Odontogram adalah suatu gambar peta mengenai keadaan gigi di dalam mulut yang merupakan bagian yang tak terpisahkan dari rekam medis Kedokteran Gigi 
+Pendaftaran -> Dokter -> Apotek -> Pasien -> Done 
 
 ## Installation
+
 1. Clone Repo
 2. Move Directory repo
 3. Composer Install
