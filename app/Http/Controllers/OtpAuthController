@@ -1,0 +1,67 @@
+<?php
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use App\Services\OtpService;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+
+class OtpAuthController extends Controller
+{
+    protected $otpService;
+
+    public function __construct(OtpService $otpService)
+    {
+        $this->otpService = $otpService;
+    }
+
+    public function showLoginForm()
+    {
+        return view('auth.otp-login');
+    }
+
+    // Generate OTP and return it to frontend
+    public function generateOtp(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email'
+        ]);
+
+        $email = $request->email;
+        $otp = $this->otpService->generateOtp($email);
+
+        // Return OTP to frontend so JavaScript can send it via Resend
+        return response()->json([
+            'success' => true,
+            'otp' => $otp,
+            'email' => $email,
+            'message' => 'OTP generated successfully'
+        ]);
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'otp' => 'required|string|size:6'
+        ]);
+
+        if (!$this->otpService->verifyOtp($request->email, $request->otp)) {
+            throw ValidationException::withMessages([
+                'otp' => ['Invalid or expired OTP code.']
+            ]);
+        }
+
+        // Find user and log them in
+        $user = User::where('email', $request->email)->first();
+        Auth::login($user);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Login successful',
+            'redirect' => route('dashboard')
+        ]);
+    }
+}
